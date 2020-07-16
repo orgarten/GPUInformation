@@ -5,13 +5,27 @@
 #include <sstream>
 #include <string>
 
-void printDeviceInformation(int deviceId) {
+std::string get_UUID_as_String(const cudaUUID_t& uuid){
+  std::stringstream result;
+  result << "GPU-";
+  size_t cnt = 0;
+  for(auto& c: uuid.bytes) {
+    std::bitset<8> bits(c);
+    if(cnt == 4 || cnt == 6 || cnt == 8 || cnt == 10) result << "-";
+    result << std::hex << bits.to_ulong() ;
+    cnt++;
+  }
+  return result.str();
+}
+
+void print_device_information(const int deviceId) {
   cudaDeviceProp deviceProp{};
   cudaGetDeviceProperties(&deviceProp, deviceId);
 
   std::cout << "================ DeviceId: " << deviceId << " ================ \n";
   std::cout << "--> General Information: \n"
-            << "\tDevice name: " << deviceProp.name << " (UUID: " << deviceProp.luid << std::dec << ")\n"
+            << "\tDevice name: " << deviceProp.name << "\n"
+            << "\tUUID: " << get_UUID_as_String(deviceProp.uuid) << "\n"
             << "\tIntegrated: " << deviceProp.integrated << "\n"
             << "\tClock rate (kHz): " << deviceProp.clockRate << "\n";
 
@@ -42,8 +56,8 @@ int main() {
   cudaGetDeviceCount(&deviceCount);
   std::cout << "Detected " << deviceCount << " GPU devices.\n";
 
-  for (unsigned int device = 0; device < deviceCount; ++device) {
-    printDeviceInformation(device);
+  for (int device = 0; device < deviceCount; ++device) {
+    print_device_information(device);
   }
 
   return 0;
