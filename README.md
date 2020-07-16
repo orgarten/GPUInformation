@@ -11,3 +11,31 @@ Build with
 $ nvcc GPUInformation.cu -o gpu_information
 ```
 or use the provided CMakeLists.txt.
+
+## Example output
+```shell script
+Detected 1 GPU devices.
+================ DeviceId: 0 ================ 
+--> General Information: 
+	Device name: GeForce RTX 2080 Ti
+	UUID: GPU-25e8aea3-4b22-ee66-29fc-b3b518158df5
+	Integrated: 0
+	Clock rate (kHz): 1545000
+
+--> Computation: 
+	Computer capability: 7.5
+	# of SMs: 68
+	Warp size: 32
+	max block dim: (1024, 1024, 64)
+	max threads/block: 1024
+	max threads/SM: 1024
+	Single/Double precision ration: 32
+
+--> Memory: 
+	Unified addressing: 1
+	Supports managed memory: 1
+	Total global memory (Gb): 10.761
+	Total constant memory (kb): 64
+	sMem/block (kb): 48
+	sMem/SM (kb): 65536
+```
