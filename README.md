@@ -5,3 +5,9 @@ it prints the information of all GPUs.
 
 Generally, this tool is an extremely dumbed-down version of `nvidia-smi`, but some of the queries might be
 useful to use in actual cuda code, e.g. when calculating the number of blocks and the threads/block.
+
+Build with 
+```shell script
+nvcc GPUInformation.cu -o gpu_information.cu
+```
+or use the provided CMakeLists.txt.
