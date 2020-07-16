@@ -8,6 +8,6 @@ useful to use in actual cuda code, e.g. when calculating the number of blocks an
 
 Build with 
 ```shell script
-nvcc GPUInformation.cu -o gpu_information.cu
+$ nvcc GPUInformation.cu -o gpu_information
 ```
 or use the provided CMakeLists.txt.
